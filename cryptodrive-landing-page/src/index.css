@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-neon-green-700: #00FFA0;
+    --color-learn-crypto: #000625;
+    --color-nhf: #000625;
+}
