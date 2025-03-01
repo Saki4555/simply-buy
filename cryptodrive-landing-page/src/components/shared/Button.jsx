@@ -1,11 +1,11 @@
-const Button = ({ buttonStyle, variant, children }) => {
+const Button = ({ buttonStyle, variant, children, py }) => {
   const buttonStyles = {
     outlined:
       "border border-neon-green-700 rounded-4xl text-neon-green-700 px-6",
    
     filled: {
-        normal: "bg-neon-green-700 rounded-4xl px-6",
-        compact: "bg-neon-green-700 rounded px-6",
+        normal: "bg-neon-green-700 rounded-4xl px-6 text-black",
+        compact: "bg-neon-green-700 rounded px-6 text-black",
     },
 
    
@@ -22,7 +22,7 @@ const Button = ({ buttonStyle, variant, children }) => {
   console.log(typeof buttonStyles[buttonStyle]);
 
   return (
-    <button className={`${classNames} font-medium py-1.5`}>{children}</button>
+    <button className={`${classNames} font-medium ${py} cursor-pointer`}>{children}</button>
   );
 };
 

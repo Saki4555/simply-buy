@@ -3,6 +3,9 @@
 
 @theme {
     --color-neon-green-700: #00FFA0;
-    --color-learn-crypto: #000625;
-    --color-nhf: #000625;
+    --color-learn-crypto: #001125;
+    --color-nhf: #101428;
+    --color-faqs: #101428;
+    --color-contact: #1C2033;
+    --color-nhf-glow: #5873FF;
 }
