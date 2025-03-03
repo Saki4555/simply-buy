@@ -1,14 +1,15 @@
-# SimplyBuy - Gadget Shop & Landing Page
+# SimplyBuy - Gadget Shop & Cryptodrive Landing Page
 
 ## Overview
-SimplyBuy is a simple gadget shop with Stripe payment integration. It includes a landing page and a full e-commerce platform where users can browse products, make purchases, and manage their orders.
+SimplyBuy is a simple gadget shop with Stripe payment integration. It includes a full e-commerce platform where users can browse products, make purchases, and manage their orders. Cryptodrive is a cryptocurrency-themed landing page designed for showcasing crypto-related services.
 
 ## Live Links
 - **Gadget Shop**: [SimplyBuy](https://simplybuy-beta.vercel.app/)
-- **Landing Page**: [SimplyBuy Landing Page](https://courageous-valkyrie-251c1c.netlify.app/)
+- **Landing Page**: [Cryptodrive](https://courageous-valkyrie-251c1c.netlify.app/)
+- **Figma Design**: [Cryptodrive UI/UX](https://www.figma.com/design/4ba5v6LUlxRMWO4OF2eYq3/Cryptocurrency-Website-Design%3A-Figma-UI%2FUX-Tutorial-%7C-Create-Stunning-Crypto-Interfaces!-(Community)?node-id=4-2&t=vGuBABqEetVbkuUl-0)
 
 ## Features
-### Gadget Shop
+### SimplyBuy - Gadget Shop
 - User authentication (Login/Signup)
 - Product listing and details
 - Wishlist for buyers
@@ -16,13 +17,13 @@ SimplyBuy is a simple gadget shop with Stripe payment integration. It includes a
 - Secure payments using Stripe
 - Private routes for buyers and sellers
 
-### Landing Page
-- Simple and responsive design
-- Introduction to SimplyBuy
-- Call-to-action for users
+### Cryptodrive - Landing Page
+- Responsive and modern UI
+- Cryptocurrency-focused design
+- Call-to-action sections
 
 ## Tech Stack
-### Gadget Shop (Frontend)
+### SimplyBuy - Gadget Shop (Frontend)
 - **Framework**: React 18
 - **State Management**: React Hooks
 - **Routing**: React Router 6
@@ -33,7 +34,7 @@ SimplyBuy is a simple gadget shop with Stripe payment integration. It includes a
 - **Icons**: React Icons
 - **Loading Indicators**: React Spinners
 
-### Gadget Shop (Backend)
+### SimplyBuy - Gadget Shop (Backend)
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: MongoDB
@@ -42,60 +43,7 @@ SimplyBuy is a simple gadget shop with Stripe payment integration. It includes a
 - **CORS Handling**: CORS
 - **Payment Processing**: Stripe
 
-### Landing Page
+### Cryptodrive - Landing Page
 - **Framework**: React 19
 - **Styling**: Tailwind CSS
 - **Build Tool**: Vite
-
-## Project Structure
-```
-├── client (Frontend)
-│   ├── src
-│   │   ├── components
-│   │   ├── layouts
-│   │   ├── pages
-│   │   ├── routes
-│   │   ├── utils
-│   ├── public
-│   ├── package.json
-│   ├── tailwind.config.js
-│   ├── vite.config.js
-│
-├── server (Backend)
-│   ├── controllers
-│   ├── models
-│   ├── routes
-│   ├── index.js
-│   ├── package.json
-│
-├── landing-page
-│   ├── src
-│   │   ├── components
-│   │   ├── pages
-│   ├── public
-│   ├── package.json
-│   ├── tailwind.config.js
-```
-
-## Installation & Setup
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo/simplybuy.git
-   cd simplybuy
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Run the project:
-   ```sh
-   npm run dev
-   ```
-4. (If applicable) Set up the backend and Stripe API keys in an `.env` file.
-
-## License
-This project is open-source and available for personal and commercial use.
-
----
-
-Happy coding! 🚀
