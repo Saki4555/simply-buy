@@ -4,6 +4,8 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_key);
+
 const port = process.env.PORT || 3000;
 
 // middlewares
@@ -117,10 +119,11 @@ const dbConnect = async () => {
     //add to wishlist
     app.patch("/wishlist/add", async (req, res) => {
       const { userEmail, productId } = req.body;
+      
       const result = await userCollection.updateOne(
         { email: userEmail },
-        { $addToSet: { wishlist: new ObjectId(String(productId)) } }
-        // {upsert: true}
+        { $addToSet: { wishList: new ObjectId((String(productId))) } }
+        
       );
       res.send(result);
     });
@@ -129,12 +132,12 @@ const dbConnect = async () => {
       const { userEmail, productId } = req.body;
       const result = await userCollection.updateOne(
         { email: userEmail },
-        { $pull: { wishlist: new ObjectId(String(productId)) } }
+        { $pull: { wishList: new ObjectId(String(productId)) } }
       );
       res.send(result);
     });
 
-    // extract wishlist's product
+    // extract wishlist's products
     app.get("/wishlist/:email", async (req, res) => {
       const email = req.params.email;
       console.log(email);
@@ -145,13 +148,65 @@ const dbConnect = async () => {
       }
 
       const wishlistProducts = await productCollection
-        .find({ _id: { $in: user.wishlist || [] } })
+        .find({ _id: { $in: user.wishList || [] } })
         .toArray();
 
       res.send(wishlistProducts);
     });
 
-    await client.connect();
+    // stripe payment
+    app.post("/create-checkout-session", async (req, res) => {
+      const wishlistProducts = req.body;
+
+      const lineItems = wishlistProducts.map((product) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: product.name,
+            images: [product.productImage],
+          },
+          unit_amount: product.price * 100,
+        },
+        quantity: 1,
+      }));
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        mode: "payment",
+        
+        // success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `https://simplybuy-beta.vercel.app/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `https://simplybuy-beta.vercel.app/cancel`,
+        line_items: lineItems,
+      });
+
+      res.json({ id: session.id });
+    });
+
+    // verify payment
+    app.post('/verify-payment', async(req, res) => {
+      const {sessionId }= req.body;
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      if (session.payment_status === "paid") {
+        res.send({ success: true });
+      } else {
+        res.send({ success: false });
+      }
+  
+    })
+
+    //clear wishlist
+    app.patch("/wishlist/clear", async (req, res) => {
+      const {userEmail} = req.body;
+      const result = await userCollection.updateOne(
+        { email: userEmail },
+        {
+          $set: { wishList: [] },
+        }
+      );
+      res.send(result);
+    });
+
+    client.connect();
     console.log("Database connected successfully");
   } catch (err) {
     console.log(err.name, err.message);
