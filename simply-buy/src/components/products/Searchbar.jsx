@@ -11,8 +11,8 @@ const Searchbar = () => {
   }
   return (
     
-    <form onSubmit={handleSearch}><label className="input input-bordered w-full flex items-center gap-2">
-    <input type="text" name="search" defaultValue={search} className="grow" placeholder="Search" />
+    <form onSubmit={handleSearch} className="w-full pt-5 lg:pt-0 lg:w-3/6"><label className="input input-bordered flex justify-between">
+    <input type="text" name="search" defaultValue={search}  placeholder="Search" />
    <button type="submit"> <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"

@@ -13,7 +13,18 @@ const AddProducts = () => {
   } = useForm();
   const { user } = useAuth();
 
-  const categories = ["Earring", "Ring", "Necklace", "Bracelet"];
+  const categories = [
+    { "id": 1, "name": "Smartphones" },
+    { "id": 2, "name": "Laptops" },
+    { 'id': 3, 'name': 'Computers'},
+    { "id": 4, "name": "Wearables" },
+    { "id": 5, "name": "Audio" },
+    { "id": 6, "name": "Gaming" },
+    { "id": 7, "name": "Cameras" },
+    { "id": 8, "name": "SmartHome" },
+    { "id": 9, "name": "Power" },
+    { "id": 10, "name": "Accessories" }
+  ];
 
   const image_hosting_url = `https://api.imgbb.com/1/upload?&key=${
     import.meta.env.VITE_IMGBB_KEY
@@ -61,8 +72,8 @@ const AddProducts = () => {
       .catch((err) => console.log(err.message));
   };
   return (
-    <div className="px-8 pt-36 pb-16">
-      <div className="border-2 border-[#C29958] rounded-lg">
+    <div className="px-8 pt-5">
+      <div className="border-2 border-primary rounded-lg">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white bg-opacity-75 shadow-lg"
@@ -104,7 +115,7 @@ const AddProducts = () => {
                 )}
               </div>
             </div>
-            {/* updating here */}
+           
             <div className="flex items-center gap-4">
               <div className="mb-4 w-1/2">
                 <label
@@ -131,16 +142,16 @@ const AddProducts = () => {
                 >
                   Category
                 </label>
-                {/* select here */}
+               
                 <select
                   required
                   className="w-full px-4 py-3 border-rose-300 focus:outline-[#C29958] rounded-md"
                   name="category"
                   {...register("category", { required: true })}
                 >
-                  {categories.map((category, idx) => (
-                    <option value={category} key={idx}>
-                      {category}
+                  {categories.map((item) => (
+                    <option value={item.name} key={item.id}>
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -237,7 +248,7 @@ const AddProducts = () => {
             {/* add button */}
             <div className="flex items-center justify-between">
               <button
-                className="bg-[#C29958] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:bg-black hover-text-white transition"
+                className="btn btn-primary w-full"
                 type="submit"
               >
                 Add

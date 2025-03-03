@@ -2,13 +2,22 @@ import { addToWishList } from "../../api/wishlist";
 import useUserData from "../../hooks/useUserData";
 import useProductsProvider from "../../hooks/useProductsProvider";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const { wishlistLengthUpdater, setWishlistLengthUpdater } =
     useProductsProvider();
   // console.log({ wishlistLengthUpdater });
 
-  const [userData] = useUserData();
+  const [userData, userDatLoading] = useUserData();
+  
   const handleAddToWishList = () => {
+    if(userData.role !== 'buyer'){
+      return toast.error(
+        <div>
+          You need to log in to add products to your wishlist. <Link to="/login" onClick={() => toast.dismiss()}><span className="text-blue-600 underline">Log in now</span></Link>.
+        </div>,{
+    })
+    }
     if(userData.email){
       addToWishList(userData.email, product._id)
       .then((data) => {
@@ -38,10 +47,11 @@ const ProductCard = ({ product }) => {
         <p className="text-sm text-gray-500">{product.category}</p>
         {/* <p className="text-sm text-gray-600 mt-1">{product.description}</p> */}
         <p className="text-md font-bold text-blue-600">${product.price}</p>
-        <p className="text-xs text-gray-400 mt-1">Sold: {product.totalSold}</p>
+        {/* <p className="text-xs text-gray-400 mt-1">Sold: {product.totalSold}</p> */}
         <button
           onClick={handleAddToWishList}
-          className="mt-3 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all"
+          
+          className={`mt-3 w-full btn ${ userDatLoading || userData.role === 'buyer' ? "btn-primary" : 'btn-disabled' }`}
         >
           Add to Wishlist
         </button>
@@ -51,3 +61,6 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
+
+
+

@@ -23,9 +23,9 @@ const Register = () => {
     const email = data.email;
     const role = data.role;
     const status = role === 'buyer' ? 'approved' : 'pending';
-    const whishList = [];
+    const wishList = [];
 
-    const userData = { email, role, status, whishList};
+    const userData = { email, role, status, wishList};
 
     createUser(data.email, data.password).then(() => {
       saveUser(userData, email).then( (data) =>{

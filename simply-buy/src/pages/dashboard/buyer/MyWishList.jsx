@@ -2,11 +2,34 @@ import Loader from "../../../components/Loader";
 import useWishlistProducts from "../../../hooks/useWishlistProducts";
 import WishlistCard from "../../../components/dashboard/WishlistCard";
 import EmptyWishlist from "../../../components/dashboard/EmptyWishlist";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 const MyWishList = () => {
   const [wishlistProducts, wishlistProductsLoading] = useWishlistProducts();
-  console.log(wishlistProductsLoading);
-//   console.log(wishlistProducts);
+  // console.log(wishlistProductsLoading);
+  //   console.log(wishlistProducts);
+
+  const makePayment = async () => {
+    const stripe = await loadStripe(
+      `${import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}`
+    );
+
+    const res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/create-checkout-session`,
+      wishlistProducts
+    );
+
+    const session = res.data;
+    console.log(session);
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
+    }
+  };
   return (
     <>
       <div className="container mx-auto p-6">
@@ -17,7 +40,9 @@ const MyWishList = () => {
 
         {wishlistProductsLoading ? (
           <Loader />
-        ) : wishlistProducts.length === 0 ? <EmptyWishlist /> :  (
+        ) : wishlistProducts.length === 0 ? (
+          <EmptyWishlist />
+        ) : (
           <>
             {" "}
             {/* Product List */}
@@ -28,7 +53,7 @@ const MyWishList = () => {
             </div>
             {/* Checkout Button */}
             <div className="mt-6">
-              <button className="w-full text-white btn btn-success">
+              <button onClick={makePayment} className="w-full text-white btn btn-success">
                 Proceed to Checkout
               </button>
             </div>

@@ -34,7 +34,7 @@ const WishlistCard = ({ product }) => {
       <div className="mt-4 text-sm text-gray-500">
         <p>Seller: {product.sellerName}</p>
         <p>Email: {product.sellerEmail}</p>
-        <p>Total Sold: {product.totalSold}</p>
+        {/* <p>Total Sold: {product.totalSold}</p> */}
       </div>
       <div className="flex justify-between mt-4">
         <button

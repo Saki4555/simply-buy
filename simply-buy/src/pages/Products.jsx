@@ -11,23 +11,24 @@ import Pagination from "../components/products/Pagination";
 
 
 export default function Products() {
+  console.log(import.meta.env.VITE_BASE_URL);
 
 
-  const { products, productsLoading } = useProductsProvider();
-  // console.log(products);
-  // console.log(productsLoading);
+  const { products, productsLoading, sortOption } = useProductsProvider();
+  console.log({products, sortOption});
+
 
   if(productsLoading) return <Loader />
 
   
   return (
-    <div className="p-6 max-w-6xl mx-auto flex gap-6">
-      {/* Sidebar for Category Filter */}
+    <div className="p-6 max-w-6xl mx-auto lg:flex gap-6">
+     
       <FilterBy />
 
-      {/* Main Content */}
+     
       <div className="w-full md:w-3/4">
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
+        <div className="flex w-full flex-col md:flex-row gap-4 items-center justify-between mb-6">
           <Searchbar />
           <SortSelector />
         </div>

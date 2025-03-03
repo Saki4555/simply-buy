@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { BsCartDash } from "react-icons/bs";
+
 import wishlistIcon from '../../assets/wishlist.png';
 
 const BuyerMenu = () => {
@@ -13,10 +13,10 @@ const BuyerMenu = () => {
           }`
         }
       >
-        <BsCartDash className="w-5 h-5" />
+    
         <img src={wishlistIcon} alt="wishlist" className="w-5 h-5" />
 
-        <span className="mx-4 font-medium">My Cart</span>
+        <span className="mx-4 font-medium">My Wishlist</span>
       </NavLink>
     </>
   );

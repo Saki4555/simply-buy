@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import logo from "../../assets/logo/logo.webp";
 
 import { GrLogout } from "react-icons/gr";
+import { FaUserCircle } from "react-icons/fa";
 
 import { AiOutlineBars } from "react-icons/ai";
 import SellerMenu from "./SellerMenu";
@@ -12,15 +13,14 @@ import useUserData from "../../hooks/useUserData";
 
 const Sidebar = () => {
   const navigate = useNavigate();
- 
+
   const { user, logOut } = useAuth();
- 
 
   const [userData] = useUserData();
   // console.log(userData);
 
   const [isActive, setActive] = useState("false");
- 
+
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
@@ -36,13 +36,6 @@ const Sidebar = () => {
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
-              {/* <img
-                className="block md:hidden"
-                src={logo}
-                alt="logo"
-                width="100"
-                height="100"
-              /> */}
               <p>saki</p>
             </Link>
           </div>
@@ -64,26 +57,23 @@ const Sidebar = () => {
         <div>
           {/* Branding & Profile Info */}
           <div>
-            <div className="w-full hidden md:flex py-3 justify-center items-center bg-[#C29958] rounded mx-auto">
             <Link to="/">
-              {/* <img
-                className="hidden md:block"
-                src={logo}
-                alt="logo"
-                width="100"
-                height="100"
-              /> */}
-              <p>Saki</p>
+              <div className="w-full bg-primary hidden md:flex py-3 justify-center items-center  rounded mx-auto text-gray-200">
+                <p className="font-bold  font-serif text-xl">Simply Buy</p>
+              </div>
             </Link>
-            </div>
             <div className="flex flex-col items-center mt-6 -mx-2">
               <Link to="/dashboard">
-                <img
-                  className="object-cover w-24 h-24 mx-2 rounded-full"
-                  src={user?.photoURL}
-                  alt="avatar"
-                  referrerPolicy="no-referrer"
-                />
+                {user?.photoURL ? (
+                  <img
+                    className="object-cover w-24 h-24 mx-2 rounded-full"
+                    src={user?.photoURL}
+                    alt="avatar"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <FaUserCircle className="w-24 h-24"/>
+                )}
               </Link>
               <Link to="/dashboard">
                 <h4 className="mx-2 mt-2 font-medium text-gray-800  hover:underline">
@@ -102,7 +92,7 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               {userData && userData.role === "seller" ? (
-               <SellerMenu />
+                <SellerMenu />
               ) : (
                 <BuyerMenu />
               )}
@@ -112,7 +102,7 @@ const Sidebar = () => {
 
         <div>
           <hr />
-          
+
           <button
             onClick={handleLogOut}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"

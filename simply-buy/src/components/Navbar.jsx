@@ -2,10 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import UserDropDown from "./home/UserDropDown";
 import useAuth from "../hooks/useAuth";
 import useUserData from "../hooks/useUserData";
+import wishlistIcon from '../assets/wishlist.png';
+
 
 const Navbar = () => {
   const { user } = useAuth();
-  const [, , wishlistLength] = useUserData();
+  const [userData, , wishlistLength] = useUserData();
   // console.log({wishlistLength});
   return (
     <div className="navbar bg-base-100">
@@ -31,26 +33,15 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+           <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/products">Products</NavLink>
+          </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl font-bold font-serif">Simply Buy</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -60,26 +51,30 @@ const Navbar = () => {
           <li>
             <NavLink to="/products">Products</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/about">About</NavLink>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="navbar-end">
         <div className="flex gap-2 items-center">
-          <button className="btn btn-sm">
-            WishList
-            <div className="badge badge-secondary badge-sm">
-              {wishlistLength}
-            </div>
-          </button>
-          <Link to="/login">
-            <button className="btn">Login</button>
+         {
+         (user && userData && userData.role === 'buyer')  &&  <button className="btn btn-sm">
+          <img src={wishlistIcon} alt="wishlist"  className="w-7"/>
+          <div className="badge badge-primary badge-md">
+            {wishlistLength}
+          </div>
+        </button>
+         }
+          {
+            !user && <Link to="/login">
+            <button className="btn btn-primary">Login</button>
           </Link>
-          <Link to="/signup">
+          }
+          {/* <Link to="/signup">
             {" "}
             <button className="btn">Signup</button>
-          </Link>
+          </Link> */}
           {user?.email && <UserDropDown />}
         </div>
       </div>

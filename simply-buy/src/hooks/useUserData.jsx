@@ -18,7 +18,7 @@ const useUserData = () => {
         .then((data) => {
           
           setUserData(data);
-          setWishlistLength(data.wishlist.length);
+          setWishlistLength(data.wishList.length);
           setUserDataLoading(false);
         })
         .catch((err) => {

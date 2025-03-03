@@ -12,6 +12,8 @@ import MyProducts from "../pages/dashboard/seller/MyProducts";
 import AddProducts from "../pages/dashboard/seller/AddProducts";
 import BuyerRoutes from "./BuyerRoutes";
 import MyWishList from "../pages/dashboard/buyer/MyWishList";
+import Success from "../pages/payment/Success";
+import Cancel from "../pages/payment/Cancel";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Register />,
+      },
+      {
+        path: "/success",
+        element: <Success />,
+      },
+      {
+        path: "/cancel",
+        element: <Cancel />,
       },
     ],
   },

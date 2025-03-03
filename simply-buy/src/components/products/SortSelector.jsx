@@ -7,7 +7,7 @@ const SortSelector = () => {
  
   return (
 
-    <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="select select-bordered w-full max-w-xs">
+    <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="select select-bordered w-full lg:w-1/6">
       <option value='asc'>Price Low to High</option>
       <option value='dsc'>Price High to Low</option>
     </select>

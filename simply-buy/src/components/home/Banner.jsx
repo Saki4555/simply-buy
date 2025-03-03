@@ -1,22 +1,24 @@
+import { useNavigate } from "react-router-dom";
+
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="hero min-h-screen"
       style={{
         backgroundImage:
-          "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
+          "url(https://img.freepik.com/premium-vector/smart-gadgets-home-appliances-icons_9206-994.jpg)",
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-neutral-content text-center">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-          <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+        <h1 className="mb-5 text-5xl font-bold">Discover Smart Gadgets</h1>
+        <p className="mb-5">
+            Explore the latest technology with our premium collection of
+            smart gadgets and home appliances. Upgrade your lifestyle today!
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <button onClick={() => navigate('/products')} className="btn btn-primary">Shop Now</button>
         </div>
       </div>
     </div>

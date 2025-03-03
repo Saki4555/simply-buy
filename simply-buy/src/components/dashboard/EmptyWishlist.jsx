@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const EmptyWishlist = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col items-center justify-center py-12">
       <img
@@ -15,7 +18,7 @@ const EmptyWishlist = () => {
         shopping now!
       </p>
       <button
-        onClick={() => (window.location.href = "/shop")} // Redirect to the shopping page or your product page
+        onClick={() => navigate('/products')} // Redirect to the shopping page or your product page
         className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
       >
         Start Shopping

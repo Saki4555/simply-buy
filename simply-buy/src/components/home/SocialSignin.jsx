@@ -14,7 +14,7 @@ const SocialSignin = () => {
           email: loggedUser.email,
           role: "buyer",
           status: "approved",
-          whishList: [],
+          wishList: [],
         };
         saveUser(userData, loggedUser.email)
         navigate("/");
